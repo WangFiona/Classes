@@ -32,6 +32,7 @@ char* music::getPublisher(){
 }
 
 void music::printStuff(){
+  cout << "Media Type: Music" << endl;
   cout << "Title: " << title << endl;
   cout << "Year: " << year << endl;
   cout << "Artist: " << artist << endl;

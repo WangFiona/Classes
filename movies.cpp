@@ -27,6 +27,7 @@ int movies::getRating(){
 }
 
 void movies::printStuff(){
+  cout << "Media Type: Movie" << endl;
   cout << "Title: " << title << endl;
   cout << "Year: " << year << endl;
   cout << "Director: " << director << endl;
