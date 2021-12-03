@@ -13,10 +13,6 @@ media::media(char* t, int y){
   year = y;
 }
 
-media::~media(){
-  delete[] title;
-}
-
 char* media::getTitle(){
   return title;
 }

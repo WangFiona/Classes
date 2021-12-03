@@ -22,7 +22,6 @@ int videogame::getRating(){
 }
 
 void videogame::printStuff(){
-  cout << "Media Type: Videogame" << endl;
   cout << "Title: " << title << endl;
   cout << "Year: " << year << endl;
   cout << "Publisher: " << publisher << endl;

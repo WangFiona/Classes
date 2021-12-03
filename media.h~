@@ -9,7 +9,7 @@ class media{
  public:
   media();
   media(char* t, int y);
-  ~media();
+  //~media();
   
   char* title;
   virtual char* getTitle();

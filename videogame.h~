@@ -9,7 +9,7 @@ using namespace std;
 class videogame: public media {
  public:
   videogame(char* t, int y, char* p, int r);
-  ~videogame();
+  //~videogame();
 
   char* publisher;
   virtual char* getPublisher();

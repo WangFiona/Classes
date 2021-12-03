@@ -1,0 +1,123 @@
+#include <iostream>
+#include <vector>
+#include <cstring>
+#include "videogame.h"
+#include "music.h"
+#include "movies.h"
+//#include "videogame.cpp"
+//#include "music.cpp"
+//#include "movies.cpp"
+using namespace std;
+
+void add(int &x, vector<videogame*> &videogamev,vector<music*> &musicv, vector<movies*> &moviesv);
+void search();
+void delet();
+
+int main() {
+  //Initialize the variables
+  //vector<vector<media*> > media;
+  vector<videogame*> videogamev;
+  vector<music*> musicv;
+  vector<movies*> moviesv;
+  //media.push_back(videogame*);
+  //media.push_back(music*);
+  //media.push_back(movies*);
+  int x=0;
+  bool running = true;
+  char command[7];
+  char ADD[] = {'A', 'D', 'D', '\0'};
+  char SEARCH[] = {'S', 'E', 'A', 'R', 'C', 'H', '\0'};
+  char DELETE[] = {'D', 'E', 'L', 'E', 'T', 'E', '\0'};
+  char QUIT[] = {'Q', 'U', 'I', 'T', '\0'};
+
+  //Ask the user for a command
+  cout << "Enter a command (ADD, SEARCH, DELETE, or QUIT):" << endl;
+
+  while (running == true) {
+    cin.get(command,7);
+    cin.get();
+
+    //Allow both upper and lower case
+    for(int i=0; i < strlen(command); i++) {
+      command[i] = toupper(command[i]);
+    }
+
+    //Determine which command the user input
+    if (strcmp(command, ADD)==false) {
+      add(x, videogamev, musicv, moviesv);
+      cout << "Enter a command (ADD, SEARCH, DELETE, or QUIT):" << endl;
+    } else if (strcmp(command, SEARCH)==false) {
+      search();
+      cout << "Enter a command (ADD, SEARCH, DELETE, or QUIT):" << endl;
+    } else if (strcmp(command, DELETE)==false) {
+      delet();
+      cout << "Enter a command (ADD, SEARCH, DELETE, or QUIT):" << endl;
+    } else if (strcmp(command, QUIT)==false) {
+      running = false;
+    } else {
+      cout << "Please enter a valid command:" << endl;
+    }
+  }
+  return 0;
+}
+
+//Method for adding students
+void add(int &x, vector<videogame*> &videogamev,vector<music*> &musicv, vector<movies*> &moviesv){
+  cout << "What media type would you like to add? (videogame, music, or movie)" << endl;
+  char vg[]={'v','i','d','e','o','g','a','m','e','s','\0'};
+  char mu[]={'m','u','s','i','c','\0'};
+  char mo[]={'m','o','v','i','e','s','\0'};
+  char mt[20];
+  cin.get(mt, 20);
+  cin.get();
+  
+  //Allow both upper and lower case
+  for(int i=0; i < strlen(mt); i++) {
+    //if(mt[i]!=' '){
+      mt[i] = tolower(mt[i]);
+      //}
+  }
+
+  //Determine which command the user input
+  if (strcmp(mt,vg)==false) {
+    cout << "Videogame" << endl;
+  } else if (strcmp(mt, mu)==false) {
+    char* t = new char[80];
+    int y;
+    char* a = new char[80];
+    int d;
+    char* p = new char[80];
+    music* test= new music(t,y,a,d,p);
+    cout << test[0].getDuration() << endl;
+    musicv.push_back(test);
+    cout << "Enter the duration:" << endl;
+    cin >> d;
+    cin.get();
+    test[x].setDuration(d);
+    cout << "The Duration: " << test[x].getDuration() << endl;
+    if(x>0){
+      cout << "The Duration: " << test[x-1].getDuration() << endl;
+    }
+    x++;
+    /*delete [10] vg;
+    delete [5] mu;
+    delete [6] mo;
+    delete [20] mt;*/
+    return;
+  } else if (strcmp(mt, mo)==false) {
+    cout << "Videogame" << endl;
+  } else {
+    cout << "Please enter a valid media type:" << endl;
+  }
+}
+
+//Method for searching in the database
+void search(){
+  cout << "command: search" << endl;
+}
+
+//Method for deleting students
+void delet(){
+  cout << "command: delete" << endl;
+}
+
