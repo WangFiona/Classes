@@ -13,6 +13,8 @@ music::music(char*t, int y, char* a, int d, char* p):media(t,y){
 
 music::~music(){
   delete[] artist;
+  delete[] title;
+  delete[] publisher;
 }
 
 char* music::getArtist(){

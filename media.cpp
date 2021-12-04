@@ -14,6 +14,7 @@ media::media(char* t, int y){
 }
 
 media::~media(){
+  cout << "media delete" << endl;
   delete[] title;
 }
 
@@ -26,6 +27,6 @@ int media::getYear(){
 }
 
 void media::printStuff(){
-  cout << "Title: " << title << endl;
-  cout << "Year: " << year << endl;
+    cout << "Title: " << title << endl;
+    cout << "Year: " << year << endl;
 }

@@ -11,6 +11,8 @@ videogame::videogame(char*t, int y, char*p, int r):media(t,y){
 
 videogame::~videogame(){
   delete[] publisher;
+  delete[] title;
+  delete[] publisher;
 }
 
 char* videogame::getPublisher(){

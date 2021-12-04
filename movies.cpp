@@ -12,6 +12,7 @@ movies::movies(char*t, int y, char* di, int d, int r):media(t,y){
 
 movies::~movies(){
   delete[] director;
+  delete[] title;
 }
 
 char* movies::getDirector(){
