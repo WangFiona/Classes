@@ -14,7 +14,6 @@ media::media(char* t, int y){
 }
 
 media::~media(){
-  cout << "media delete" << endl;
   delete[] title;
 }
 

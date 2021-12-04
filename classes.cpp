@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <iterator>
 #include <cstring>
 #include "videogame.h"
 #include "music.h"
@@ -185,21 +186,35 @@ void search(vector<media*> &database){
   }
   int target=0;
   bool found=false;
-  cout << "Enter a title or year to search for" << endl;
+  cout << "Are you searching for a title or year (t or y)" << endl;
+  char t='t';
+  char isY='y';
+  char which;
+  bool isYear=false;
+  cin >> which;
+  cin.get();
+  if(which==t){
+    cout << "Enter a title:" << endl;
+  } else if(which==isY){
+    cout << "Enter a year:" << endl;
+    isYear=true;
+  } else {
+    cout << "You did not enter a title or year" << endl;
+    return;
+  }
   char* ty = new char[80];
   cin.get(ty, 80);
   cin.get();
   int y=0;
+  if(isYear==true){
+   y=atoi(ty);
+  }
 
   //While something has not been found
   while(found==false){
-    for(int i=0; i<strlen(ty); i++){
-      y=ty[i]-'0';
-    }
-
     //Go through the database to see what matches the user's input
     for(int i=0; i<database.size(); i++){
-      if((strcmp(ty, database[i]->getTitle())==false || y==database[i]->getYear())){
+      if((isYear==false && (strcmp(ty, database[i]->getTitle())==false) || (isYear==true && y==database[i]->getYear()))){
 	database[i]->printStuff();
 	found=true;
       }
@@ -215,37 +230,67 @@ void search(vector<media*> &database){
 
 //Method for deleting things from the database
 void delet(vector<media*> &database){
+  //Check if there is anything in the database                                                                             
+  if(database.size()==0){
+    cout << "The database is empty" << endl;
+    return;
+  }
   int target=0;
   bool found=false;
-  cout << "Enter a title or year to delete" << endl;
+  cout << "Are you searching for a title or year (t or y)" << endl;
+  char t='t';
+  char isY='y';
+  char which;
+  bool isYear=false;
+  cin >> which;
+  cin.get();
+  if(which==t){
+    cout << "Enter a title:" << endl;
+  } else if(which==isY){
+    cout << "Enter a year:" << endl;
+    isYear=true;
+  } else {
+    cout << "You did not enter a title or year" << endl;
+    return;
+  }
   char* ty = new char[80];
   cin.get(ty, 80);
   cin.get();
   int y=0;
+  if(isYear==true){
+   y=atoi(ty);
+  }
 
   //While something has not been found
   while(found==false){
-    for(int i=0; i<strlen(ty); i++){
-      y=ty[i]-'0';
-    }
-
+    vector<media*>::iterator i;
+    media* ptr;
+    char yn = 'y';
+    char check;
     //Go through the database to see what matches the user's input
-    for(int i=0; i<database.size(); i++){
-      if(strcmp(ty, database[i]->getTitle())==false || y==database[i]->getYear()){
+    for(i=database.begin(); i<database.end();){
+      ptr=*i;
+      if((isYear==false && strcmp(ty, ptr->getTitle())==false) || (isYear==true && y==ptr->getYear())){
 	//Confirm that the user would like to delete
-	cout << "Are you sure you want to delete " << ty << " (y or n)" << endl;
-	char yn = 'y';
-	char check;
+	cout << "Are you sure you want to delete the following (y or n)" << endl;
+	ptr->printStuff();
 	cin >> check;
 	cin.get();
+
 	//Delete the item
 	if(yn==check){
-	  delete[] database[i];
+	  database.erase(i);
+	  delete ptr;
 	  cout << ty << " has been deleted" << endl;
+	}else{
+	  i++;
 	}
-        found=true;
+	found=true;
+      }else{
+	i++;
       }
     }
+    
     //If nothing matches the user's input
     if(found==false){
       cout << "The title/year could not be found. Please enter a valid search:" << endl;
